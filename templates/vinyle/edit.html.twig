@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Vinyle{% endblock %}
+
+{% block body %}
+    <h1>Edit Vinyle</h1>
+
+    {{ include('vinyle/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_vinyle_index') }}">back to list</a>
+
+    {{ include('vinyle/_delete_form.html.twig') }}
+{% endblock %}
