@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/contact/message')]
 final class ContactMessageController extends AbstractController
 {
+    
     #[Route(name: 'app_contact_message_index', methods: ['GET'])]
     public function index(ContactMessageRepository $contactMessageRepository): Response
     {
@@ -71,11 +72,32 @@ final class ContactMessageController extends AbstractController
     #[Route('/{id}', name: 'app_contact_message_delete', methods: ['POST'])]
     public function delete(Request $request, ContactMessage $contactMessage, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$contactMessage->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$contactMessage->getId(), $request->request->get('_token'))) {
             $entityManager->remove($contactMessage);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_contact_message_index', [], Response::HTTP_SEE_OTHER);
+    }
+    
+    #[Route('/public/new', name: 'app_contact_message_public_new', methods: ['GET', 'POST'])]
+    public function publicNew(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $contactMessage = new ContactMessage();
+        $form = $this->createForm(ContactMessageType::class, $contactMessage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($contactMessage);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre message a été envoyé !');
+
+            return $this->redirectToRoute('app_home'); // redirige vers la home
+        }
+
+        return $this->render('contact_message/public_new.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
