@@ -1,46 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vinyle{% endblock %}
+{% block title %}{{ vinyle.vinyle }}{% endblock %}
 
 {% block body %}
-    <h1>Vinyle</h1>
+<h1>{{ vinyle.vinyle }}</h1>
+<p>Artiste : {{ vinyle.artiste }}</p>
+<p>Année : {{ vinyle.annee }}</p>
+<p>Prix : {{ vinyle.prix }} €</p>
+<p>Description : {{ vinyle.description }}</p>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ vinyle.id }}</td>
-            </tr>
-            <tr>
-                <th>Vinyle</th>
-                <td>{{ vinyle.vinyle }}</td>
-            </tr>
-            <tr>
-                <th>Artiste</th>
-                <td>{{ vinyle.artiste }}</td>
-            </tr>
-            <tr>
-                <th>Annee</th>
-                <td>{{ vinyle.annee }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ vinyle.prix }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ vinyle.description }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ vinyle.image }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_vinyle_index') }}">back to list</a>
-
-    <a href="{{ path('app_vinyle_edit', {'id': vinyle.id}) }}">edit</a>
-
-    {{ include('vinyle/_delete_form.html.twig') }}
+<a href="{{ path('app_vinyle_index') }}">Retour à la liste</a>
 {% endblock %}

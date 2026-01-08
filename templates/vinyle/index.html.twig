@@ -1,45 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vinyle index{% endblock %}
+{% block title %}Vinyles{% endblock %}
 
 {% block body %}
-    <h1>Vinyle index</h1>
+<h1>Vinyles</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Vinyle</th>
-                <th>Artiste</th>
-                <th>Annee</th>
-                <th>Prix</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for vinyle in vinyles %}
-            <tr>
-                <td>{{ vinyle.id }}</td>
-                <td>{{ vinyle.vinyle }}</td>
-                <td>{{ vinyle.artiste }}</td>
-                <td>{{ vinyle.annee }}</td>
-                <td>{{ vinyle.prix }}</td>
-                <td>{{ vinyle.description }}</td>
-                <td>{{ vinyle.image }}</td>
-                <td>
-                    <a href="{{ path('app_vinyle_show', {'id': vinyle.id}) }}">show</a>
-                    <a href="{{ path('app_vinyle_edit', {'id': vinyle.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_vinyle_new') }}">Create new</a>
+<div id="vinyles">
+    {% for vinyle in vinyles %}
+        <div class="vinyle">
+            <h2>{{ vinyle.vinyle }}</h2>
+            <p>Artiste : {{ vinyle.artiste }}</p>
+            <p>Année : {{ vinyle.annee }}</p>
+            <p>Prix : {{ vinyle.prix }} €</p>
+            <a href="{{ path('app_vinyle_show', {'id': vinyle.id}) }}">Voir le produit</a>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

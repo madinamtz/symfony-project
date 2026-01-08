@@ -2,80 +2,85 @@
 
 namespace App\Controller;
 
-use App\Entity\Vinyle;
-use App\Form\VinyleType;
-use App\Repository\VinyleRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/vinyle')]
 final class VinyleController extends AbstractController
 {
-    #[Route(name: 'app_vinyle_index', methods: ['GET'])]
-    public function index(VinyleRepository $vinyleRepository): Response
+    #[Route('', name: 'app_vinyle_index', methods: ['GET'])]
+    public function index(): Response
     {
+        $vinyles = [
+            [
+                'id' => 1,
+                'vinyle' => 'Abbey Road',
+                'artiste' => 'The Beatles',
+                'annee' => 1969,
+                'prix' => 25,
+                'description' => 'Album légendaire des Beatles.',
+            ],
+            [
+                'id' => 2,
+                'vinyle' => 'Dark Side of the Moon',
+                'artiste' => 'Pink Floyd',
+                'annee' => 1973,
+                'prix' => 30,
+                'description' => 'Classique du rock progressif.',
+            ],
+            [
+                'id' => 3,
+                'vinyle' => 'Thriller',
+                'artiste' => 'Michael Jackson',
+                'annee' => 1982,
+                'prix' => 28,
+                'description' => 'L’album le plus vendu au monde.',
+            ],
+        ];
+
         return $this->render('vinyle/index.html.twig', [
-            'vinyles' => $vinyleRepository->findAll(),
+            'vinyles' => $vinyles,
         ]);
     }
 
-    #[Route('/new', name: 'app_vinyle_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'app_vinyle_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    public function show(int $id): Response
     {
-        $vinyle = new Vinyle();
-        $form = $this->createForm(VinyleType::class, $vinyle);
-        $form->handleRequest($request);
+        // même tableau hardcodé, indexé par id
+        $vinyles = [
+            1 => [
+                'id' => 1,
+                'vinyle' => 'Abbey Road',
+                'artiste' => 'The Beatles',
+                'annee' => 1969,
+                'prix' => 25,
+                'description' => 'Album légendaire des Beatles.',
+            ],
+            2 => [
+                'id' => 2,
+                'vinyle' => 'Dark Side of the Moon',
+                'artiste' => 'Pink Floyd',
+                'annee' => 1973,
+                'prix' => 30,
+                'description' => 'Classique du rock progressif.',
+            ],
+            3 => [
+                'id' => 3,
+                'vinyle' => 'Thriller',
+                'artiste' => 'Michael Jackson',
+                'annee' => 1982,
+                'prix' => 28,
+                'description' => 'L’album le plus vendu au monde.',
+            ],
+        ];
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($vinyle);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_vinyle_index', [], Response::HTTP_SEE_OTHER);
+        if (!isset($vinyles[$id])) {
+            throw $this->createNotFoundException('Vinyle non trouvé.');
         }
 
-        return $this->render('vinyle/new.html.twig', [
-            'vinyle' => $vinyle,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_vinyle_show', methods: ['GET'])]
-    public function show(Vinyle $vinyle): Response
-    {
         return $this->render('vinyle/show.html.twig', [
-            'vinyle' => $vinyle,
+            'vinyle' => $vinyles[$id],
         ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_vinyle_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Vinyle $vinyle, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(VinyleType::class, $vinyle);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_vinyle_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('vinyle/edit.html.twig', [
-            'vinyle' => $vinyle,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_vinyle_delete', methods: ['POST'])]
-    public function delete(Request $request, Vinyle $vinyle, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$vinyle->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($vinyle);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_vinyle_index', [], Response::HTTP_SEE_OTHER);
     }
 }
