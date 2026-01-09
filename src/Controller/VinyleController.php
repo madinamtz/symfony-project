@@ -14,19 +14,19 @@ final class VinyleController extends AbstractController
         $vinyles = [
             [
                 'id' => 1,
-                'vinyle' => 'BALLADS 1',
-                'artiste' => 'Joji',
-                'annee' => 2020,
-                'prix' => 40,
-                'description' => 'Album phare de Joji ayant fait propulser sa carrière.',
-            ],
-            [
-                'id' => 2,
                 'vinyle' => 'Hit me hard and soft',
                 'artiste' => 'Billie Eilish',
                 'annee' => 2024,
                 'prix' => 30,
                 'description' => 'Un des albums les plus populaires de ces dernières années.',
+            ],
+            [
+                'id' => 2,
+                'vinyle' => 'BALLADS 1',
+                'artiste' => 'Joji',
+                'annee' => 2020,
+                'prix' => 40,
+                'description' => 'Album phare de Joji ayant fait propulser sa carrière.',
             ],
             [
                 'id' => 3,
@@ -49,19 +49,19 @@ final class VinyleController extends AbstractController
         $vinyles = [
             1 => [
                 'id' => 1,
-                'vinyle' => 'BALLADS 1',
-                'artiste' => 'Joji',
-                'annee' => 2020,
-                'prix' => 40,
-                'description' => 'Album phare de Joji ayant fait propulser sa carrière.',
-            ],
-            2 => [
-                'id' => 2,
                 'vinyle' => 'Hit me hard and soft',
                 'artiste' => 'Billie Eilish',
                 'annee' => 2024,
                 'prix' => 30,
                 'description' => 'Un des albums les plus populaires de ces dernières années.',
+            ],
+            2 => [
+                'id' => 2,
+                'vinyle' => 'BALLADS 1',
+                'artiste' => 'Joji',
+                'annee' => 2020,
+                'prix' => 40,
+                'description' => 'Album phare de Joji ayant fait propulser sa carrière.',
             ],
             3 => [
                 'id' => 3,
