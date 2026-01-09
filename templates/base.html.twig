@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Vinyl Shop{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </head>
@@ -11,7 +11,7 @@
         <header>
             <nav>
                 <a href="{{ path('app_home') }}">Accueil</a> |
-                <a href="{{ path('app_vinyle_index') }}">Vinyles</a> |
+                {# <a href="{{ path('app_vinyle_index') }}">Vinyles</a> | #}
                 {% if app.user %}
                     <a href="{{ path('app_profile_show') }}">Profil</a> |
                     <a href="{{ path('app_logout') }}">Déconnexion</a>
@@ -30,7 +30,7 @@
             <a href="#">Mentions légales</a> |
             <a href="#">CGU</a> |
             <a href="#">Politique de confidentialité</a> |
-            <a href="#">Qui sommes-nous ?</a>
+            <a href="#">Qui sommes-nous ?</a> |
             <a href="{{ path('app_contact_message_public_new') }}">Contact</a>
         </footer>
     </body>

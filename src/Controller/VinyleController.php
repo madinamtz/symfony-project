@@ -6,10 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/vinyle')]
 final class VinyleController extends AbstractController
 {
-    #[Route('', name: 'app_vinyle_index', methods: ['GET'])]
+    #[Route('/vinyle', name: 'app_vinyle_index', methods: ['GET'])]
     public function index(): Response
     {
         $vinyles = [
@@ -44,10 +43,9 @@ final class VinyleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_vinyle_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route('/vinyle/{id}', name: 'app_vinyle_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(int $id): Response
     {
-        // même tableau hardcodé, indexé par id
         $vinyles = [
             1 => [
                 'id' => 1,
