@@ -7,5 +7,28 @@
 # To list all registered routes, run the following command:
 #   bin/console debug:router
 
-controllers:
-    resource: routing.controllers
+vinyle_index:
+    path: /vinyle
+    controller: App\Controller\VinyleController::index
+    methods: GET
+
+vinyle_show:
+    path: /vinyle/{id}
+    controller: App\Controller\VinyleController::show
+    methods: GET
+    requirements:
+        id: '\d+'
+
+app_profile_show:
+    path: /profile
+    controller: App\Controller\ProfileController::show
+
+app_profile_edit:
+    path: /profile/edit
+    controller: App\Controller\ProfileController::edit
+
+app_profile_delete:
+    path: /profile/delete
+    controller: App\Controller\ProfileController::delete
+    methods: POST
+

@@ -3,17 +3,23 @@
 {% block title %}Vinyles{% endblock %}
 
 {% block body %}
-<h1>Vinyles</h1>
+    <h1>Nos vinyles</h1>
 
-<div id="vinyles">
-    {% for vinyle in vinyles %}
-        <div class="vinyle">
-            <h2>{{ vinyle.vinyle }}</h2>
-            <p>Artiste : {{ vinyle.artiste }}</p>
-            <p>Année : {{ vinyle.annee }}</p>
-            <p>Prix : {{ vinyle.prix }} €</p>
-            <a href="{{ path('app_vinyle_show', {'id': vinyle.id}) }}">Voir le produit</a>
-        </div>
-    {% endfor %}
-</div>
+    <div class="vinyl-grid">
+        {% for vinyle in vinyles %}
+            <a
+                href="{{ path('app_vinyle_show', { id: vinyle.id }) }}"
+                class="vinyl-card"
+            >
+                <img
+                    src="{{ asset('images/vinyle' ~ vinyle.id ~ '.jpg') }}"
+                    alt="{{ vinyle.vinyle }}"
+                >
+
+                <h3>{{ vinyle.vinyle }}</h3>
+                <p>{{ vinyle.artiste }}</p>
+                <p>{{ vinyle.prix }} €</p>
+            </a>
+        {% endfor %}
+    </div>
 {% endblock %}

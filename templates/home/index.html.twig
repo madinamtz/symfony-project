@@ -3,17 +3,24 @@
 {% block title %}Bienvenue sur Vinyl Shop!{% endblock %}
 
 {% block body %}
-    <h1>Vinyl Shop</h1>
+<h1>Vinyl Shop</h1>
 
-    <p>
-        Découvrez une sélection de vinyles soigneusement choisis,
-        <br>entre classiques intemporels et nouveautés.
-    </p>
+<p>
+    Découvrez une sélection de vinyles soigneusement choisis,
+    <br>entre classiques intemporels et nouveautés.
+</p>
 
-    <div class="home-images">
-        <img src="{{ asset('images/vinyle2.jpg') }}" alt="Vinyle Billie Eilish">
-        <img src="{{ asset('images/vinyle1.jpg') }}" alt="Vinyle Joji">
+<div class="home-images">
+    <a href="{{ path('vinyle_show', { id: 1 }) }}" class="home-vinyl">
+        <img src="{{ asset('images/vinyle1.jpg') }}" alt="Vinyle Billie Eilish">
+    </a>
+
+    <a href="{{ path('vinyle_show', { id: 2 }) }}" class="home-vinyl">
+        <img src="{{ asset('images/vinyle2.jpg') }}" alt="Vinyle Joji">
+    </a>
+
+    <a href="{{ path('vinyle_show', { id: 3 }) }}" class="home-vinyl">
         <img src="{{ asset('images/vinyle3.jpg') }}" alt="Vinyle Wave to Earth">
-    </div>
+    </a>
+</div>
 {% endblock %}
-
